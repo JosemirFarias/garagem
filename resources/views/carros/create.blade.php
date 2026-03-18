@@ -36,8 +36,8 @@
                     <label>Vincular Motorista (Opcional)</label>
                     <select name="motorista_id" class="form-control">
                         <option value="">-- Sem Motorista --</option>
-                        @foreach ($motoristas as $m)
-                            <option value="{{ $m->id }}">{{ $m->nome }}</option>
+                        @foreach ($motoristas as $motorista)
+                            <option value="{{ $motorista->id }}">{{ $motorista->nome }}</option>
                         @endforeach
                     </select>
                 </div>

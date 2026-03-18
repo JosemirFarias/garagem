@@ -27,11 +27,13 @@
                                 onclick="return confirm('Tem certeza?')">
                                 Apagar
                             </button>
+                            <a href="{{ route('motoristas.show', $motorista->id) }}"
+                                class="btn btn-outline-info btn-sm">Detalhes</a>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('carros.index') }}" class="btn btn-link">Ver Carros</a>
+    <a href="{{ route('carros.index') }}" class="btn btn-secondary">Ver Carros</a>
 </div>

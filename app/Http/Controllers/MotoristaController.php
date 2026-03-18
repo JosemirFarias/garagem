@@ -48,7 +48,8 @@ class MotoristaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $motorista = \App\Models\Motorista::findOrFail($id);
+        return view('motoristas.show', compact('motorista'));
     }
 
     /**
@@ -56,7 +57,8 @@ class MotoristaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $motorista = \App\Models\Motorista::findOrFail($id);
+        return view('motoristas.edit', compact('motorista'));
     }
 
     /**
@@ -64,7 +66,20 @@ class MotoristaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $motorista = \App\Models\Motorista::findOrFail($id);
+
+        $data = $request->validate([
+            'nome'            => 'required|string|max:255',
+            'cpf'             => 'required|string|unique:motoristas,cpf,' . $id,
+            'cnh'             => 'required|string|unique:motoristas,cnh,' . $id,
+            'data_nascimento' => 'required|date',
+            'validade_cnh'    => 'required|date',
+            'telefone'        => 'required|string',
+        ]);
+
+        $motorista->update($data);
+
+        return redirect()->route('motoristas.index')->with('success', 'Dados atualizados!');
     }
 
     /**

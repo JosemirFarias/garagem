@@ -16,7 +16,7 @@
                 <th>Placa</th>
                 <th>Marca/Modelo</th>
                 <th>Motorista Responsável</th>
-                <th width="150">Ações</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +39,8 @@
                                 onclick="return confirm('Tem certeza?')">
                                 Apagar
                             </button>
+                            <a href="{{ route('carros.show', $carro->id) }}"
+                                class="btn btn-outline-info btn-sm">Detalhes</a>
                         </form>
                     </td>
                 </tr>
@@ -49,5 +51,5 @@
             @endforelse
         </tbody>
     </table>
-    <a href="{{ route('motoristas.index') }}" class="btn btn-link">Ver Motoristas</a>
+    <a href="{{ route('motoristas.index') }}" class="btn btn-secondary">Ver Motoristas</a>
 </div>

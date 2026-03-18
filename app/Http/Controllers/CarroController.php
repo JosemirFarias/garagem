@@ -49,7 +49,8 @@ class CarroController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $carro = \App\Models\Carro::with('motorista')->findOrFail($id);
+        return view('carros.show', compact('carro'));
     }
 
     /**
@@ -57,7 +58,10 @@ class CarroController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $carro = \App\Models\Carro::findOrFail($id);
+        $motoristas = \App\Models\Motorista::all();
+
+        return view('carros.edit', compact('carro', 'motoristas'));
     }
 
     /**
@@ -65,7 +69,18 @@ class CarroController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $carro = \App\Models\Carro::findOrFail($id);
+
+        $data = $request->validate([
+            'marca'        => 'required|string',
+            'modelo'       => 'required|string',
+            'ano'          => 'required|numeric',
+            'motorista_id' => 'nullable|exists:motoristas,id'
+        ]);
+
+        $carro->update($data);
+
+        return redirect()->route('carros.index')->with('success', 'Carro atualizado com sucesso!');
     }
 
     /**
